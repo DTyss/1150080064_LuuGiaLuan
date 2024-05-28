@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LuanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BangLuong">
+          <Key>
+            <PropertyRef Name="Thang" />
+          </Key>
+          <Property Name="Thang" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="TongTLvaPC" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChiTietBangLuong">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="Thang" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaNV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaTinhLuong" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoNgayCong" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="MucLuong" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phai" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="DThoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="TrinhDoChuyenMon" Type="nvarchar" MaxLength="100" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="MaPB" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhongBan">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenPB" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TinhLuong">
+          <Key>
+            <PropertyRef Name="MaTinhLuong" />
+          </Key>
+          <Property Name="MaTinhLuong" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LuongDH" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__BangLuong__MaNV__3E52440B">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BangLuong" Type="Self.BangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BangLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBa__MaTin__4316F928">
+          <End Role="TinhLuong" Type="Self.TinhLuong" Multiplicity="0..1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TinhLuong">
+              <PropertyRef Name="MaTinhLuong" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="MaTinhLuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBa__Thang__4222D4EF">
+          <End Role="BangLuong" Type="Self.BangLuong" Multiplicity="0..1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BangLuong">
+              <PropertyRef Name="Thang" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="Thang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBan__MaNV__412EB0B6">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaPB__3B75D760">
+          <End Role="PhongBan" Type="Self.PhongBan" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongBan">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LuanModelStoreContainer">
+          <EntitySet Name="BangLuong" EntityType="Self.BangLuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietBangLuong" EntityType="Self.ChiTietBangLuong" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhongBan" EntityType="Self.PhongBan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TinhLuong" EntityType="Self.TinhLuong" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BangLuong__MaNV__3E52440B" Association="Self.FK__BangLuong__MaNV__3E52440B">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="BangLuong" EntitySet="BangLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBa__MaTin__4316F928" Association="Self.FK__ChiTietBa__MaTin__4316F928">
+            <End Role="TinhLuong" EntitySet="TinhLuong" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBa__Thang__4222D4EF" Association="Self.FK__ChiTietBa__Thang__4222D4EF">
+            <End Role="BangLuong" EntitySet="BangLuong" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBan__MaNV__412EB0B6" Association="Self.FK__ChiTietBan__MaNV__412EB0B6">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuong" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaPB__3B75D760" Association="Self.FK__NhanVien__MaPB__3B75D760">
+            <End Role="PhongBan" EntitySet="PhongBan" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LuanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BangLuong">
+          <Key>
+            <PropertyRef Name="Thang" />
+          </Key>
+          <Property Name="Thang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TongTLvaPC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__BangLuong__MaNV__3E52440B" FromRole="BangLuong" ToRole="NhanVien" />
+          <NavigationProperty Name="ChiTietBangLuongs" Relationship="Self.FK__ChiTietBa__Thang__4222D4EF" FromRole="BangLuong" ToRole="ChiTietBangLuong" />
+        </EntityType>
+        <EntityType Name="ChiTietBangLuong">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="Thang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaTinhLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoNgayCong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BangLuong" Relationship="Self.FK__ChiTietBa__Thang__4222D4EF" FromRole="ChiTietBangLuong" ToRole="BangLuong" />
+          <NavigationProperty Name="TinhLuong" Relationship="Self.FK__ChiTietBa__MaTin__4316F928" FromRole="ChiTietBangLuong" ToRole="TinhLuong" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK__ChiTietBan__MaNV__412EB0B6" FromRole="ChiTietBangLuong" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="MaNV" />
+          </Key>
+          <Property Name="MaNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MucLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDoChuyenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaPB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BangLuongs" Relationship="Self.FK__BangLuong__MaNV__3E52440B" FromRole="NhanVien" ToRole="BangLuong" />
+          <NavigationProperty Name="ChiTietBangLuong" Relationship="Self.FK__ChiTietBan__MaNV__412EB0B6" FromRole="NhanVien" ToRole="ChiTietBangLuong" />
+          <NavigationProperty Name="PhongBan" Relationship="Self.FK__NhanVien__MaPB__3B75D760" FromRole="NhanVien" ToRole="PhongBan" />
+        </EntityType>
+        <EntityType Name="PhongBan">
+          <Key>
+            <PropertyRef Name="MaPB" />
+          </Key>
+          <Property Name="MaPB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenPB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__MaPB__3B75D760" FromRole="PhongBan" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="TinhLuong">
+          <Key>
+            <PropertyRef Name="MaTinhLuong" />
+          </Key>
+          <Property Name="MaTinhLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LuongDH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChiTietBangLuongs" Relationship="Self.FK__ChiTietBa__MaTin__4316F928" FromRole="TinhLuong" ToRole="ChiTietBangLuong" />
+        </EntityType>
+        <Association Name="FK__BangLuong__MaNV__3E52440B">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BangLuong" Type="Self.BangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="BangLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBa__Thang__4222D4EF">
+          <End Role="BangLuong" Type="Self.BangLuong" Multiplicity="0..1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BangLuong">
+              <PropertyRef Name="Thang" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="Thang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBa__MaTin__4316F928">
+          <End Role="TinhLuong" Type="Self.TinhLuong" Multiplicity="0..1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TinhLuong">
+              <PropertyRef Name="MaTinhLuong" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="MaTinhLuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietBan__MaNV__412EB0B6">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="1" />
+          <End Role="ChiTietBangLuong" Type="Self.ChiTietBangLuong" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="MaNV" />
+            </Principal>
+            <Dependent Role="ChiTietBangLuong">
+              <PropertyRef Name="MaNV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__NhanVien__MaPB__3B75D760">
+          <End Role="PhongBan" Type="Self.PhongBan" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongBan">
+              <PropertyRef Name="MaPB" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="MaPB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LuanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BangLuongs" EntityType="Self.BangLuong" />
+          <EntitySet Name="ChiTietBangLuongs" EntityType="Self.ChiTietBangLuong" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="PhongBans" EntityType="Self.PhongBan" />
+          <EntitySet Name="TinhLuongs" EntityType="Self.TinhLuong" />
+          <AssociationSet Name="FK__BangLuong__MaNV__3E52440B" Association="Self.FK__BangLuong__MaNV__3E52440B">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="BangLuong" EntitySet="BangLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBa__Thang__4222D4EF" Association="Self.FK__ChiTietBa__Thang__4222D4EF">
+            <End Role="BangLuong" EntitySet="BangLuongs" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBa__MaTin__4316F928" Association="Self.FK__ChiTietBa__MaTin__4316F928">
+            <End Role="TinhLuong" EntitySet="TinhLuongs" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietBan__MaNV__412EB0B6" Association="Self.FK__ChiTietBan__MaNV__412EB0B6">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="ChiTietBangLuong" EntitySet="ChiTietBangLuongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__NhanVien__MaPB__3B75D760" Association="Self.FK__NhanVien__MaPB__3B75D760">
+            <End Role="PhongBan" EntitySet="PhongBans" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LuanModelStoreContainer" CdmEntityContainer="LuanEntities">
+          <EntitySetMapping Name="BangLuongs">
+            <EntityTypeMapping TypeName="LuanModel.BangLuong">
+              <MappingFragment StoreEntitySet="BangLuong">
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TongTLvaPC" ColumnName="TongTLvaPC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietBangLuongs">
+            <EntityTypeMapping TypeName="LuanModel.ChiTietBangLuong">
+              <MappingFragment StoreEntitySet="ChiTietBangLuong">
+                <ScalarProperty Name="Thang" ColumnName="Thang" />
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="MaTinhLuong" ColumnName="MaTinhLuong" />
+                <ScalarProperty Name="SoNgayCong" ColumnName="SoNgayCong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="LuanModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="MaNV" ColumnName="MaNV" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="MucLuong" ColumnName="MucLuong" />
+                <ScalarProperty Name="Phai" ColumnName="Phai" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="DThoai" ColumnName="DThoai" />
+                <ScalarProperty Name="TrinhDoChuyenMon" ColumnName="TrinhDoChuyenMon" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhongBans">
+            <EntityTypeMapping TypeName="LuanModel.PhongBan">
+              <MappingFragment StoreEntitySet="PhongBan">
+                <ScalarProperty Name="MaPB" ColumnName="MaPB" />
+                <ScalarProperty Name="TenPB" ColumnName="TenPB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TinhLuongs">
+            <EntityTypeMapping TypeName="LuanModel.TinhLuong">
+              <MappingFragment StoreEntitySet="TinhLuong">
+                <ScalarProperty Name="MaTinhLuong" ColumnName="MaTinhLuong" />
+                <ScalarProperty Name="LuongDH" ColumnName="LuongDH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

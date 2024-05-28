@@ -1,0 +1,166 @@
+﻿@model Luan.Models.ChiTietBangLuong
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+    <title>Tạo Chi Tiết Bảng Lương Mới</title>
+
+    <style>
+        /* CSS cho form */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+        .form-horizontal {
+            font-size: 1em;
+            padding: 2vw;
+            max-width: 80%;
+            border-radius: 1vw;
+            box-shadow: 0 0 1vw rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%; /* Sử dụng % cho khung form */
+            max-width: 600px; /* Giới hạn chiều rộng tối đa */
+        }
+
+        .form-group {
+            margin-bottom: 1.5vh;
+            width: 100%;
+        }
+
+        .checkbox-label {
+            margin-left: 0.5vw; /* Khoảng cách giữa nút và nhãn */
+        }
+
+        .control-label {
+            font-weight: bold;
+            color: #555;
+            font-size: 0.8em; /* Kích thước font tương đối */
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-control {
+            padding: 1vw;
+            border-radius: 0.5vw;
+            border: 0.2vw solid #ccc;
+            font-size: 0.8em; /* Kích thước font tương đối */
+            width: 100%; /* Sử dụng % cho ô nhập liệu */
+            max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khung form */
+        }
+
+        .btn-default {
+            padding: 0.8vw 1.5vw;
+            border-radius: 0.5vw;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.8em; /* Kích thước font tương đối */
+            width: 90%; /* Sử dụng % cho nút */
+            max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khung form */
+        }
+
+        .action {
+            font-size: 0.7em; /* Kích thước font tương đối */
+            border: 0.2vw solid rgba(0, 0, 0, 0);
+            padding: 1vw;
+            border-radius: 0.5vw;
+            background-color: rgba(255, 255, 255, 0.5);
+            width: 90%; /* Sử dụng % cho action */
+            max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của khung form */
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 0;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-horizontal">
+
+            <h2>Tạo chi tiết bảng lương mới</h2>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SoNgayCong, "Số Ngày Công", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.SoNgayCong, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SoNgayCong, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaNV, "Mã NV", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("MaNV", ViewBag.MaNVList as SelectList, "Chọn", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaNV, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Thang, "Tháng", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("Thang", ViewBag.ThangList as SelectList, "Chọn", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Thang, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MaTinhLuong, "Mã Tính Lương", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-12">
+                            @Html.DropDownList("MaTinhLuong", ViewBag.MaTinhLuongList as SelectList, "Chọn", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaTinhLuong, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group text-center">
+                        <!-- Thêm class text-center để căn giữa -->
+                        <div class="col-md-12">
+                            <!-- Sử dụng toàn bộ chiều rộng -->
+                            <input type="submit" value="Tạo" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                <div class="action">
+                    @Html.ActionLink("Trở lại trang Chi Tiết Bảng Lương", "Index")
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+
+
+
+</body>

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<Luan.Models.ChiTietBangLuong>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <title>Chi Tiết Bảng Lương</title>
+    <style>
+        /* CSS để căn giữa và màu chữ mặc định */
+        h2 {
+            text-align: center;
+            word-spacing: -5px;
+        }
+
+        .colorful {
+            transition: color 0.3s; /* Hiệu ứng màu chữ */
+        }
+
+            /* CSS để thay đổi màu chữ khi di chuột vào */
+            .colorful:hover {
+                color: rgb(0, 0, 255); /* Màu xanh */
+            }
+
+        .pink-link:hover {
+            color: #ff5c9d; /* Màu chữ khi di chuột qua */
+            /* Các thuộc tính khác của action link khi di chuột qua */
+        }
+
+        .create-btn {
+            font-size: 1.2rem; /* Dùng rem thay vì px */
+            margin-right: 3%; /* Sử dụng phần trăm (%) cho margin */
+            color: #ff00dc;
+            border: 1px solid #ff00dc; /* Màu viền */
+            padding: 1vh 2vh; /* Sử dụng viewport height (vh) thay vì px */
+            border-radius: 4px; /* Độ cong của viền */
+            display: inline-block; /* Hiển thị dưới dạng block để có thể thiết lập kích thước và margin */
+        }
+
+        .navbar-link {
+            font-size: 1.2rem; /* Dùng rem thay vì px */
+            color: #ff00dc;
+            text-decoration: none;
+            border: 1px solid #ff00dc; /* Màu viền */
+            padding: 1vh 2vh; /* Sử dụng viewport height (vh) thay vì px */
+            border-radius: 4px; /* Độ cong của viền */
+            display: inline-block; /* Hiển thị dưới dạng block để có thể thiết lập kích thước và margin */
+        }
+
+            .navbar-link:hover {
+                text-decoration: underline;
+            }
+
+        .table-container {
+            overflow-x: auto; /* Cho phép cuộn ngang khi bảng quá rộng */
+            margin: 5vh 0; /* Sử dụng viewport height (vh) thay vì px */
+        }
+
+        .table {
+            width: 100%; /* Bảng sẽ tự động điều chỉnh kích thước theo container */
+            border-collapse: collapse;
+        }
+
+            .table th,
+            .table td {
+                font-size: 1rem; /* Dùng rem thay vì px */
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid #ddd;
+                padding: 1vh; /* Sử dụng viewport height (vh) thay vì px */
+            }
+
+            .table th {
+                background-color: #f2f2f2;
+            }
+    </style>
+</head>
+<body>
+    <h2 class="colorful">
+        Chi Tiết Bảng Lương
+
+    </h2>
+    <script>
+        // JavaScript để tạo màu ngẫu nhiên cho mỗi ký tự
+        const colorfulLetters = document.querySelectorAll('.colorful');
+
+        colorfulLetters.forEach(letter => {
+            letter.addEventListener('mouseenter', () => {
+                // Tạo một màu ngẫu nhiên cho từng ký tự
+                const randomColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+                letter.style.color = randomColor;
+            });
+
+            letter.addEventListener('mouseleave', () => {
+                // Đặt lại màu của ký tự khi rời khỏi chuột
+                letter.style.color = '';
+            });
+        });
+    </script>
+    <p>
+        @Html.ActionLink("Tạo chi tiết bảng lương mới", "Create", null, new { @class = "create-btn" })
+        <a href="@Url.Action("Index", "AddHome")" class="navbar-link">Quay lại trang Quản lý </a>
+
+    </p>
+    <div class="table-container">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.SoNgayCong)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NhanVien.MaNV)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.BangLuong.Thang)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TinhLuong.MaTinhLuong)
+                </th>
+
+                <th></th>
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoNgayCong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NhanVien.MaNV)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BangLuong.Thang)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TinhLuong.MaTinhLuong)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Xóa", "Delete", new { id1 = item.Thang, id2 = item.MaNV, id3 = item.MaTinhLuong }, new { @class = "pink-link" })
+
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>

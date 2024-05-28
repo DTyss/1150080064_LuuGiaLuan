@@ -1,0 +1,175 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+    <title>TÍNH TIỀN LƯƠNG</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- fevicon -->
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesoeet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!-- Libraries Stylesheet -->
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        h1 {
+            font-size: 30px;
+        }
+
+        .navbar-link {
+            color: white !important;
+            margin-right: 15px;
+            display: block; /* Đặt các action thành phần tử block */
+            margin-bottom: 5px; /* Thêm khoảng cách giữa các action */
+            transition: opacity 0.3s ease; /* Thêm transition cho hiệu ứng mờ */
+        }
+
+            .navbar-link:hover {
+                opacity: 0.7; /* Điều chỉnh độ mờ khi di chuột vào */
+            }
+
+        .scrolling-text {
+            white-space: nowrap; /* Ngăn chặn việc xuống dòng */
+            overflow: hidden; /* Ẩn phần văn bản bị tràn ra ngoài */
+            position: relative; /* Đặt vị trí tương đối để di chuyển */
+            animation: none; /* Không sử dụng animation */
+        }
+
+        .flower-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+            .flower-card:hover {
+                border-color: #98b1ce; /* Màu viền khi rê chuột vào */
+            }
+
+        #menuButton {
+            background-color: rgba(0, 0, 0, 0); /* Màu nền trong suốt */
+            border: 1px solid white; /* Viền màu trắng */
+            color: white;
+            font-size: 1.3em;
+            padding: 5px 10px; /* Khoảng cách giữa chữ và viền */
+            border-radius: 20px; /* Độ cong của viền, điều chỉnh số này để tạo hình tròn hoặc oval */
+            transition: opacity 0.3s ease; /* Thêm transition cho hiệu ứng mờ */
+        }
+
+            #menuButton:hover {
+                opacity: 0.7; /* Điều chỉnh độ mờ khi di chuột vào */
+            }
+
+        #menuIcon {
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .larger-button {
+            font-size: 1.2em; /* Điều chỉnh kích thước chữ */
+            padding: 8px 8px; /* Điều chỉnh kích thước padding để tăng kích thước của nút */
+        }
+
+        h3:hover {
+            color: #ff9999;
+            transform: scale(1.1);
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .flower-card img:hover {
+            transform: scale(1.1); /* Phóng to ảnh lên 110% */
+            transition: transform 0.3s ease; /* Áp dụng hiệu ứng chuyển động */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid text-left" style="background-color: black; padding: 10px;border-top-left-radius: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px;">
+        <button id="menuButton" class="navbar-link" style="font-size: 1.3em;">Chọn</button>
+        <div id="menuActions" style="display: none;">
+            <a href="@Url.Action("Index", "Home")" class="navbar-link" style="font-size: 1.3em;"> Trang chủ </a>
+            <a href="@Url.Action("Index", "BangLuong")" class="navbar-link" style="font-size: 1.3em;"> Bảng Lương </a>
+            <a href="@Url.Action("Index", "ChiTietBangLuong")" class="navbar-link " style="font-size: 1.3em;"> Chi Tiết Bảng Lương </a>
+            <a href="@Url.Action("Index", "NhanVien")" class="navbar-link" style="font-size: 1.3em;"> Nhân Viên </a>
+            <a href="@Url.Action("Index", "PhongBan")" class="navbar-link" style="font-size: 1.3em;"> Phòng Ban </a>
+            <a href="@Url.Action("Index", "TinhLuong")" class="navbar-link" style="font-size: 1.3em;"> Tính Lương</a>
+
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("menuButton").addEventListener("click", function () {
+            var menuActions = document.getElementById("menuActions");
+            if (menuActions.style.display === "none") {
+                menuActions.style.display = "block";
+            } else {
+                menuActions.style.display = "none";
+            }
+        });
+        $(document).ready(function () {
+            $('#menuIcon').click(function () {
+                $('#menuActions').toggle();
+            });
+        });
+
+    </script>
+
+    <div class="container-fluid p-5" style="color: #333333; text-align: center; background-image: url('../images/experience-img.jpg'); background-size: cover; background-position: center; background-size: contain; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
+        <h1 style="color: #e6f2ff; text-shadow: 2px 2px 4px #000000; font-size: 36px;">TÍNH TIỀN LƯƠNG</h1>
+
+    </div>
+    <script>
+        // JavaScript để di chuyển văn bản từ trái sang phải trong phần tử container
+        const marqueeText = document.getElementById('marqueeText');
+        const marqueeContainer = document.getElementById('marqueeContainer');
+        let position = 0;
+        const moveText = () => {
+            position -= 1;
+            marqueeText.style.left = position + 'px';
+            if (position <= -marqueeText.offsetWidth) {
+                position = marqueeContainer.offsetWidth;
+            }
+            requestAnimationFrame(moveText);
+        };
+        moveText();
+    </script>
+</body>
+

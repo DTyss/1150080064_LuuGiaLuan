@@ -1,0 +1,100 @@
+﻿@model Luan.Models.ChiTietBangLuong
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<head>
+    <title>Xóa</title>
+    <style>
+        /* CSS cho tiêu đề */
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* CSS cho form */
+        .form-delete {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .form-actions input[type="submit"] {
+                background-color: #dc3545;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+                .form-actions input[type="submit"]:hover {
+                    background-color: #c82333;
+                }
+
+            .form-actions a {
+                color: #007bff;
+                text-decoration: none;
+                margin-left: 10px;
+            }
+    </style>
+</head>
+<body>
+    <h2>Bạn có chắc chắn xóa  này không???</h2>
+
+    <div class="form-delete">
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.SoNgayCong) :                 @Html.DisplayFor(model => model.SoNgayCong)
+
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.NhanVien.MaNV) :                 @Html.DisplayFor(model => model.NhanVien.MaNV)
+
+            </dt>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TinhLuong.MaTinhLuong) :                 @Html.DisplayFor(model => model.TinhLuong.MaTinhLuong)
+
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BangLuong.Thang) :                 @Html.DisplayFor(model => model.BangLuong.Thang)
+
+            </dt>
+
+
+
+
+
+
+
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Xóa" class="btn btn-default" /> |
+                @Html.ActionLink("Trở lại trang chủ", "Index", null, new { @class = "navbar-link" })
+            </div>
+        }
+    </div>
+</body>
+
+
